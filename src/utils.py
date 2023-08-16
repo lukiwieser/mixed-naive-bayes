@@ -3,7 +3,14 @@ from matplotlib import pyplot as plt
 from sklearn.model_selection import GridSearchCV
 
 
-def print_results_table(results_list: list[dict[str, np.ndarray]], headings: list[str]):
+def print_results_table(results_list: list[dict[str, np.ndarray]], headings: list[str]) -> None:
+    """
+    Print table of sklearn cross-validation scores.
+    Makes it easy to compare different models.
+
+    :param results_list: cross-validation outputs of each model
+    :param headings: heading that should be displayed for each model
+    """
     left_col_size = 25
     other_col_size = 16
     # (name to print, name in dict)
@@ -35,14 +42,28 @@ def plot_gridsearch_scores(grid: GridSearchCV,
                            plot_score_time: bool = True,
                            plot_stds: bool = False,
                            figsize: tuple[float, float] = (20, 5),
-                           strip_param_prefix: str = ""):
+                           strip_param_prefix: str = ""
+                           ) -> None:
+    """
+    Plot the hyperparameters of gridsearch.
+    Inspired by: https://stackoverflow.com/questions/37161563/how-to-graph-grid-scores-from-gridsearchcv
+
+    :param grid: GridSearchCV object from Gridsearch
+    :param scoring_names: List of scores that should be plotted e.g. ["accuracy","f1_macro","precision_macro","recall_macro"]
+    :param plot_scores: if scores should be plotted
+    :param plot_fit_time: if fit time should be plotted
+    :param plot_score_time: if score time should be plotted
+    :param plot_stds: if the standard deviations should be shown in the graph
+    :param figsize: figure size of the plots, this is the same as matplotlib's figsize
+    :param strip_param_prefix: prefix to remove from hyperparameter names e.g turin M__LAPLACE_SMOOTHING to LAPLACE_SMOOTHING. This can be usefull since e.g. sklearn pipelines add prefixes, that will be shown in the plots.
+    """
+
     def remove_prefix(text: str, prefix: str) -> str:
         if text.startswith(prefix):
             return text[len(prefix):]
         return text
 
-    # inspired by: https://stackoverflow.com/questions/37161563/how-to-graph-grid-scores-from-gridsearchcv
-    # example for scoring names: ["accuracy","f1_macro","precision_macro","recall_macro"]
+    #
 
     # results from grid search
     results = grid.cv_results_
