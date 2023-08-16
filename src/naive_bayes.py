@@ -36,7 +36,11 @@ class MixedNB(BaseEstimator, ClassifierMixin):
             raise ValueError(f"Length of categorical_feature_mask = {len(self.categorical_feature_mask)} must match "
                              f"number of features of X = {X.shape[1]}")
 
-    def fit(self, X, y=None):
+    def fit(self, X, y=None) -> None:
+        """
+        Fit the Mixed Naive Bayes according to X, y
+        """
+
         X, y = check_X_y(X, y, dtype=None)
         X = pd.DataFrame(X)
         y = pd.Series(y)
@@ -83,7 +87,14 @@ class MixedNB(BaseEstimator, ClassifierMixin):
         self.n_features_in_ = X.shape[1]
         self.is_fitted_ = True
 
-    def predict(self, X):
+    def predict(self, X) -> pd.DataFrame:
+        """
+        Perform classification on X, using the Mixed Naive Bayes.
+
+        :param X: The input samples
+        :return: Predicted target values for X.
+        """
+
         check_is_fitted(self, 'is_fitted_')
         X = check_array(X, dtype=None, ensure_min_features=self.n_features_in_)
         X = pd.DataFrame(X)
