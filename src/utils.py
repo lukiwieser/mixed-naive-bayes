@@ -1,0 +1,179 @@
+import numpy as np
+from matplotlib import pyplot as plt
+from sklearn.model_selection import GridSearchCV
+
+
+def print_results_table(results_list: list[dict[str, np.ndarray]], headings: list[str]):
+    left_col_size = 25
+    other_col_size = 16
+    # (name to print, name in dict)
+    properties_to_print = [
+        ("avg. accuracy:", "test_accuracy"),
+        ("avg. f1_macro:", "test_f1_macro"),
+        ("avg. precision_macro:", "test_precision_macro"),
+        ("avg. recall_macro:", "test_recall_macro"),
+        ("avg. avg. fitting time:", "fit_time"),
+        ("avg. avg. score time:", "score_time")
+    ]
+
+    print(f"{'': <{left_col_size}}", end=" ")
+    for heading in headings:
+        print(f"{heading: <{other_col_size}}", end=" ")
+    print("")
+
+    for prop in properties_to_print:
+        print(f"{prop[0]: <{left_col_size}}", end=" ")
+        for results in results_list:
+            print(f"{results[prop[1]].mean():2.4f}{'': <{other_col_size - 6}}", end=" ")
+        print("")
+
+
+def plot_gridsearch_scores(grid: GridSearchCV,
+                           scoring_names: list[str],
+                           plot_scores: bool = True,
+                           plot_fit_time: bool = True,
+                           plot_score_time: bool = True,
+                           plot_stds: bool = False,
+                           figsize: tuple[float, float] = (20, 5),
+                           strip_param_prefix: str = ""):
+    def remove_prefix(text: str, prefix: str) -> str:
+        if text.startswith(prefix):
+            return text[len(prefix):]
+        return text
+
+    # inspired by: https://stackoverflow.com/questions/37161563/how-to-graph-grid-scores-from-gridsearchcv
+    # example for scoring names: ["accuracy","f1_macro","precision_macro","recall_macro"]
+
+    # results from grid search
+    results = grid.cv_results_
+    mean_fit_time = results["mean_fit_time"]
+    std_fit_time = results["std_fit_time"]
+    mean_score_time = results["mean_score_time"]
+    std_score_time = results["std_score_time"]
+    scoring_results = []
+    std_score_results = []
+    for name in scoring_names:
+        scoring_results.append(results['mean_test_' + name])
+        std_score_results.append(results['std_test_' + name])
+
+    # setup mask of the best scoring
+    masks_names = list(grid.best_params_.keys())
+    masks = []  # Save as mask, where each param has best value
+    for param_name, best_value in grid.best_params_.items():
+        masks.append(results["param_" + param_name].data == best_value)
+    params = grid.param_grid
+
+    # plotting Scores
+    if plot_scores:
+        if len(masks_names) == 1:
+            fig, ax = plt.subplots(figsize=figsize)
+            fig.suptitle('Score per Parameter')
+            fig.text(0.04, 0.5, 'Mean Score', va='center', rotation='vertical')
+            p = masks_names[0]
+            x = [str(item) for item in params[p]]
+            for j, scoring_name in enumerate(scoring_names):
+                y = scoring_results[j]
+                e = std_score_results[j]
+                if plot_stds:
+                    ax.errorbar(x, y, yerr=e, linestyle='--', marker='o', label=scoring_name, barsabove=True, capsize=5)
+                else:
+                    ax.errorbar(x, y, linestyle='--', marker='o', label=scoring_name)
+            ax.set_xlabel(remove_prefix(p, strip_param_prefix).upper())
+            plt.legend()
+            plt.show()
+        if len(masks_names) > 1:
+            fig, ax = plt.subplots(1, len(params), sharex='none', sharey='all', figsize=figsize)
+            fig.suptitle('Score per Parameter')
+            fig.text(0.04, 0.5, 'Mean Score', va='center', rotation='vertical')
+            for i, p in enumerate(masks_names):
+                # find the best indices, for the given parameter
+                # e.g. if param-1 has values 1,2,3; find the indices where they reach the best values
+                m = np.stack(masks[:i] + masks[i + 1:])
+                best_parms_mask = m.all(axis=0)
+                best_indices = np.where(best_parms_mask)
+                # plot
+                # convert x to string, so that values are equally spaced in plot
+                x = [str(item) for item in params[p]]
+                for j, scoring_name in enumerate(scoring_names):
+                    y = scoring_results[j][best_indices]
+                    e = std_score_results[j][best_indices]
+                    if plot_stds:
+                        ax[i].errorbar(x, y, yerr=e, linestyle='--', marker='o', label=scoring_name, barsabove=True,
+                                       capsize=5)
+                    else:
+                        ax[i].errorbar(x, y, linestyle='--', marker='o', label=scoring_name)
+                ax[i].set_xlabel(remove_prefix(p, strip_param_prefix).upper())
+            plt.legend()
+            plt.show()
+
+    # plotting fitting time
+    if plot_fit_time:
+        if len(masks_names) == 1:
+            fig, ax = plt.subplots(figsize=figsize)
+            fig.suptitle('Fitting Time per Parameter')
+            fig.text(0.04, 0.5, 'Mean Fitting Time', va='center', rotation='vertical')
+            p = masks_names[0]
+            x = [str(item) for item in params[p]]
+            y = mean_fit_time
+            e = std_fit_time
+            if plot_stds:
+                ax.errorbar(x, y, yerr=e, linestyle='--', marker='o', color="#9467bd", barsabove=True, capsize=5)
+            else:
+                ax.errorbar(x, y, linestyle='--', marker='o', color="#9467bd")
+            ax.set_xlabel(remove_prefix(p, strip_param_prefix).upper())
+            plt.show()
+        if len(masks_names) > 1:
+            fig, ax = plt.subplots(1, len(params), sharex='none', sharey='all', figsize=figsize)
+            fig.suptitle('Fitting Time per Parameter')
+            fig.text(0.04, 0.5, 'Mean Fitting Time', va='center', rotation='vertical')
+            for i, p in enumerate(masks_names):
+                # find best indices
+                m = np.stack(masks[:i] + masks[i + 1:])
+                best_parms_mask = m.all(axis=0)
+                best_indices = np.where(best_parms_mask)
+                # plot
+                x = [str(item) for item in params[p]]
+                y = mean_fit_time[best_indices]
+                e = std_fit_time[best_indices]
+                if plot_stds:
+                    ax[i].errorbar(x, y, yerr=e, linestyle='--', marker='o', color="#9467bd", barsabove=True, capsize=5)
+                else:
+                    ax[i].errorbar(x, y, linestyle='--', marker='o', color="#9467bd")
+                ax[i].set_xlabel(remove_prefix(p, strip_param_prefix).upper())
+            plt.show()
+
+    # plotting score time
+    if plot_score_time:
+        if len(masks_names) == 1:
+            fig, ax = plt.subplots(figsize=figsize)
+            fig.suptitle('Score Time per Parameter')
+            fig.text(0.04, 0.5, 'Mean Score Time', va='center', rotation='vertical')
+            p = masks_names[0]
+            x = [str(item) for item in params[p]]
+            y = mean_score_time
+            e = std_score_time
+            if plot_stds:
+                ax.errorbar(x, y, yerr=e, linestyle='--', marker='o', color="#9467bd", barsabove=True, capsize=5)
+            else:
+                ax.errorbar(x, y, linestyle='--', marker='o', color="#9467bd")
+            ax.set_xlabel(remove_prefix(p, strip_param_prefix).upper())
+            plt.show()
+        if len(masks_names) > 1:
+            fig, ax = plt.subplots(1, len(params), sharex='none', sharey='all', figsize=figsize)
+            fig.suptitle('Score Time per Parameter')
+            fig.text(0.04, 0.5, 'Mean Score Time', va='center', rotation='vertical')
+            for i, p in enumerate(masks_names):
+                # find best indices
+                m = np.stack(masks[:i] + masks[i + 1:])
+                best_parms_mask = m.all(axis=0)
+                best_indices = np.where(best_parms_mask)
+                # plot
+                x = [str(item) for item in params[p]]
+                y = mean_score_time[best_indices]
+                e = std_score_time[best_indices]
+                if plot_stds:
+                    ax[i].errorbar(x, y, yerr=e, linestyle='--', marker='o', color="#9467bd", barsabove=True, capsize=5)
+                else:
+                    ax[i].errorbar(x, y, linestyle='--', marker='o', color="#9467bd")
+                ax[i].set_xlabel(remove_prefix(p, strip_param_prefix).upper())
+            plt.show()
