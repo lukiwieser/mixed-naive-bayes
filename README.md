@@ -63,7 +63,7 @@ Compare the performance of our approach against other algorithms.
 
 We use 2 datasets that are quite different from each other:
 
-| Dataset             | Type of data | Observations | Features | Target Classes |
+| Dataset             | Type of Data | Observations | Features | Target Classes |
 |---------------------|--------------|-------------:|---------:|---------------:|
 | Amazon Review       | numeric      |          750 |    10000 |             50 |
 | Car Insurance Claim | categorical  |        10000 |       12 |              2 |
@@ -71,7 +71,7 @@ We use 2 datasets that are quite different from each other:
 
 We compare *Our Naive Bayes* against *Scikit-learns Naive Bayes* and *Scikit-learns Random Forrest*:
 
-| Dataset             | Model                       | Accuracy | Fitting time (ms) | Score time (ms) |
+| Dataset             | Model                       | Accuracy | Fitting Time (ms) | Score Time (ms) |
 |---------------------|-----------------------------|---------:|------------------:|----------------:|
 | Amazon Review       | Our Naive Bayes*            |     0.65 |               588 |            1884 |
 | --//--              | Scikit-learn Naive Bayes*   |     0.65 |               588 |             188 |
