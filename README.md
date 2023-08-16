@@ -60,5 +60,5 @@ Datasets (`/data`):
 
 ## License
 
-The source code in `/src` is licensed under MIT. See the LICENSE file at `src/LICENSE` for more info.
+The source code in `/src` is licensed under the [MIT license](/src/LICENSE).
 For the datasets in `/data` best check the license of the original source.
