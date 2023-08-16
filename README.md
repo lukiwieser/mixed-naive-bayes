@@ -71,14 +71,14 @@ We use 2 datasets that are quite different from each other:
 
 We compare *Our Naive Bayes* against *Scikit-learns Naive Bayes* and *Scikit-learns Random Forrest*:
 
-| Dataset             | Model                       | Accuracy | Fitting time (s) | Score time (s) |
-|---------------------|-----------------------------|----------|------------------|----------------|
-| Amazon Review       | Our Naive Bayes*            | 0.65     | 0.588            | 1.884          |
-| --//--              | Scikit-learn Naive Bayes*   | 0.65     | 0.588            | 0.188          |
-| --//--              | Scikit-learn Random Forrest | 0.61     | 0.551            | 0.011          |
-| Car Insurance Claim | Our Naive Bayes**           | 0.80     | 0.064            | 0.900          |
-| --//--              | Scikit-learn Naive Bayes**  | 0.80     | 0.006            | 0.005          |
-| --//--              | Scikit-learn Random Forrest | 0.81     | 0.777            | 0.037          |
+| Dataset             | Model                       | Accuracy | Fitting time (ms) | Score time (ms) |
+|---------------------|-----------------------------|---------:|------------------:|----------------:|
+| Amazon Review       | Our Naive Bayes*            |     0.65 |               588 |            1884 |
+| --//--              | Scikit-learn Naive Bayes*   |     0.65 |               588 |             188 |
+| --//--              | Scikit-learn Random Forrest |     0.61 |               551 |              11 |
+| Car Insurance Claim | Our Naive Bayes**           |     0.80 |                64 |             900 |
+| --//--              | Scikit-learn Naive Bayes**  |     0.80 |                 6 |               5 |
+| --//--              | Scikit-learn Random Forrest |     0.81 |               777 |              37 |
 
 *Laplace-Smoothing=50
 **Variance-Smoothing=0.01
