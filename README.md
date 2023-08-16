@@ -1,5 +1,9 @@
 # Mixed Naive Bayes
 
+Naive Bayes Classifier for categorical and/or numeric features.
+
+Scikit learn currently only supports numeric data (with GaussianNB) or categorical data (with CategoricalNB), but not both. 
+That's why I created this prototype.
 
 This project uses Python 3.9.
 
