@@ -115,7 +115,7 @@ For more details look at the jupyter notebook `naive_bayes_comparison.ipynb`.
 - our implementation is very effective, but slowish.
 - take numerical stability into account e.g.:
   - log-likelihoods (when multiplying lots of small probabilities together)
-  - variance-smoothing (so that variance values do not get to small)
+  - variance-smoothing (so that variance values do not get too small)
 - efficiently working with pandas/numpy is important
   - can turn hours into seconds!  
   - e.g. by using bulk operations instead of lots of loops
