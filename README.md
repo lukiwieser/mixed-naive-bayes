@@ -56,3 +56,9 @@ Datasets (`/data`):
 - `car_insurance_claims.csv`: Car Insurance Claims, published on [Kaggle](https://www.kaggle.com/datasets/sagnik1511/car-insurance-data)
 - `naive-bayes_example_cat+num.csv`: Very simple Weather dataset, with categorical & numeric attributes
 - `naive-bayes_example_cat.csv`: Very simple Weather dataset, with categorical attributes
+
+
+## License
+
+The source code in `/src` is licensed under MIT. See the LICENSE file at `src/LICENSE` for more info.
+For the datasets in `/data` best check the license of the original source.
