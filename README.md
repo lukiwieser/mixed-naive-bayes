@@ -2,6 +2,7 @@
 
 Naive Bayes Classifier for categorical and/or numeric features.
 
+Motivation:
 Scikit learn currently only supports numeric data (with GaussianNB) or categorical data (with CategoricalNB), but not both. 
 That's why I created this prototype.
 
@@ -89,6 +90,20 @@ However, the fitting (aka training) time and the scoring (aka testing) time are 
 Random Forest has the highest fitting time, but makes up for it with a quite fast score time.
 
 For more details look at the jupyter notebook `naive_bayes_comparison.ipynb`.
+
+
+## Lessons Learned
+
+- our implementation is very effective, but slowish.
+- take numerical stability into account e.g.:
+  - log-likelihoods (when multiplying lots of small probabilities together)
+  - variance-smoothing (so that variance values do not get to small)
+- efficiently working with pandas/numpy is important
+  - can turn hours into seconds!  
+  - e.g. by using bulk operations instead of lots of loops
+- input validation can avoid foolish mistakes
+- it is easy to make mistakes, the algorithm can run but still output wrong calculations
+
 
 ## File Overview
 
