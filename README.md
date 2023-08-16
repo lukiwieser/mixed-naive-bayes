@@ -41,6 +41,24 @@ Additionally, you can run the jupyter notebooks `naive_bayes_comparison.ipynb` a
 
 For more details, you can look at the jupyter notebooks or at the comments/docstrings in the source code.
 
+
+## File Overview
+
+Source Code (`/src`):
+
+- `naive_bayes.py`: Mixed Naive Bayes Algorithm
+- `naive_bayes_testcases.ipynb`: Testcases to check if our naive-bayes implementation works as expected
+- `naive_bayes_comparison.ipynb`: Compare our algorithm to other approaches and do hyperparameter tuning
+- `utils.py:` contains utils e.g. function for plotting the hyperparameters of gridsearch, function for plotting results as a table
+
+Datasets (`/data`):
+
+- `amazon_review.csv`: Amazon Reviews, adapted version of the dataset published on [UCI Machine Learning Repository](https://doi.org/10.24432/C55C88)
+- `car_insurance_claims.csv`: Car Insurance Claims, published on [Kaggle](https://www.kaggle.com/datasets/sagnik1511/car-insurance-data)
+- `naive-bayes_example_cat+num.csv`: Very simple Weather dataset, with categorical & numeric attributes
+- `naive-bayes_example_cat.csv`: Very simple Weather dataset, with categorical attributes
+
+
 ## Implementation
 
 - Handle categorical and numeric data at the same time!
@@ -103,23 +121,6 @@ For more details look at the jupyter notebook `naive_bayes_comparison.ipynb`.
   - e.g. by using bulk operations instead of lots of loops
 - input validation can avoid foolish mistakes
 - it is easy to make mistakes, the algorithm can run but still output wrong calculations
-
-
-## File Overview
-
-Source Code (`/src`):
-
-- `naive_bayes.py`: Mixed Naive Bayes Algorithm
-- `naive_bayes_testcases.ipynb`: Testcases to check if our naive-bayes implementation works as expected
-- `naive_bayes_comparison.ipynb`: Compare our algorithm to other approaches and do hyperparameter tuning
-- `utils.py:` contains utils e.g. function for plotting the hyperparameters of gridsearch, function for plotting results as a table
-
-Datasets (`/data`):
-
-- `amazon_review.csv`: Amazon Reviews, adapted version of the dataset published on [UCI Machine Learning Repository](https://doi.org/10.24432/C55C88)
-- `car_insurance_claims.csv`: Car Insurance Claims, published on [Kaggle](https://www.kaggle.com/datasets/sagnik1511/car-insurance-data)
-- `naive-bayes_example_cat+num.csv`: Very simple Weather dataset, with categorical & numeric attributes
-- `naive-bayes_example_cat.csv`: Very simple Weather dataset, with categorical attributes
 
 
 ## License
