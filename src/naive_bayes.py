@@ -20,18 +20,18 @@ class MixedNB(BaseEstimator, ClassifierMixin):
         self.categorical_feature_mask = categorical_feature_mask
         self.var_smoothing = var_smoothing
         self.laplace_smoothing = laplace_smoothing
-        self.check_var_smoothing()
-        self.check_laplace_smoothing()
+        self._check_var_smoothing()
+        self._check_laplace_smoothing()
 
-    def check_laplace_smoothing(self) -> None:
+    def _check_laplace_smoothing(self) -> None:
         if self.laplace_smoothing < 0:
             raise ValueError(f"Parameter laplace_smoothing = {self.laplace_smoothing} should be > 0")
 
-    def check_var_smoothing(self) -> None:
+    def _check_var_smoothing(self) -> None:
         if self.var_smoothing < 0:
             raise ValueError(f"Parameter var_smoothing = {self.var_smoothing} should be > 0")
 
-    def check_match_categorical_feature_mask(self, X: pd.DataFrame) -> None:
+    def _check_match_categorical_feature_mask(self, X: pd.DataFrame) -> None:
         if len(self.categorical_feature_mask) != X.shape[1]:
             raise ValueError(f"Length of categorical_feature_mask = {len(self.categorical_feature_mask)} must match "
                              f"number of features of X = {X.shape[1]}")
@@ -40,7 +40,7 @@ class MixedNB(BaseEstimator, ClassifierMixin):
         X, y = check_X_y(X, y, dtype=None)
         X = pd.DataFrame(X)
         y = pd.Series(y)
-        self.check_match_categorical_feature_mask(X)
+        self._check_match_categorical_feature_mask(X)
 
         # get indices of categorical & numeric features
         self.idx_categorical_features_: list[int] = X.columns[np.array(self.categorical_feature_mask)].to_list()
@@ -87,7 +87,7 @@ class MixedNB(BaseEstimator, ClassifierMixin):
         check_is_fitted(self, 'is_fitted_')
         X = check_array(X, dtype=None, ensure_min_features=self.n_features_in_)
         X = pd.DataFrame(X)
-        self.check_match_categorical_feature_mask(X)
+        self._check_match_categorical_feature_mask(X)
 
         def predict_row(row):
             # Categorical Features:
