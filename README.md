@@ -57,6 +57,37 @@ For more details, you can look at the jupyter notebooks or at the comments/docst
   - Use Log-Likelihoods when predicting
 
 
+## Evaluation
+
+Compare the performance of our approach against other algorithms.
+
+We use 2 datasets that are quite different from each other:
+
+| Dataset             | Type of data | Observations | Features | Target Classes |
+|---------------------|--------------|-------------:|---------:|---------------:|
+| Amazon Review       | numeric      |          750 |    10000 |             50 |
+| Car Insurance Claim | categorical  |        10000 |       12 |              2 |
+
+
+We compare *Our Naive Bayes* against *Scikit-learns Naive Bayes* and *Scikit-learns Random Forrest*:
+
+| Dataset             | Model                       | Accuracy | Fitting time (s) | Score time (s) |
+|---------------------|-----------------------------|----------|------------------|----------------|
+| Amazon Review       | Our Naive Bayes*            | 0.65     | 0.588            | 1.884          |
+| --//--              | Scikit-learn Naive Bayes*   | 0.65     | 0.588            | 0.188          |
+| --//--              | Scikit-learn Random Forrest | 0.61     | 0.551            | 0.011          |
+| Car Insurance Claim | Our Naive Bayes**           | 0.80     | 0.064            | 0.900          |
+| --//--              | Scikit-learn Naive Bayes**  | 0.80     | 0.006            | 0.005          |
+| --//--              | Scikit-learn Random Forrest | 0.81     | 0.777            | 0.037          |
+
+*Laplace-Smoothing=50
+**Variance-Smoothing=0.01
+
+Our implementation reaches similar accuracy as scikit-learns implementation.
+However, the fitting (aka training) time and the scoring (aka testing) time are substantially slower.
+
+For more details look at the jupyter notebook `naive_bayes_comparison.ipynb`.
+
 ## File Overview
 
 Source Code (`/src`):
