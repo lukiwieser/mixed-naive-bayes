@@ -38,7 +38,23 @@ y_pred = model.predict(X_test)
 
 Additionally, you can run the jupyter notebooks `naive_bayes_comparison.ipynb` and `naive_bayes_testcases.ipynb`.
 
-For more details you can look at the jupyter notebooks or at the comments/docstrings in the source code.
+For more details, you can look at the jupyter notebooks or at the comments/docstrings in the source code.
+
+## Implementation
+
+- Handle categorical and numeric data at the same time!
+  - Specify datatype at initialization
+- Sklearn-style interface
+    - For interoperability with sklearn pipelines etc.
+- Fitting:
+  - Categorical:
+    - Count relative frequencies
+    - Laplace Smoothing
+  - Numeric:
+    - Calculate gaussian distribution (mean, variance)
+    - Variance Smoothing (for numeric stability, inspired by scikit-learn)
+- Predicting:
+  - Use Log-Likelihoods when predicting
 
 
 ## File Overview
