@@ -119,6 +119,9 @@ For more details look at the jupyter notebook `naive_bayes_comparison.ipynb`.
 - efficiently working with pandas/numpy is important
   - can turn hours into seconds!  
   - e.g. by using bulk operations instead of lots of loops
+- garbage in, garbage out
+  - accidentally doing nonsense can happen easier than expected
+  - e.g. do one-hot-encoding, then apply gaussian naive bayes
 - input validation can avoid foolish mistakes
 - it is easy to make mistakes, the algorithm can run but still output wrong calculations
 
