@@ -3,7 +3,7 @@
 Naive Bayes Classifier for categorical and/or numeric features.
 
 Motivation:
-Scikit learn currently only supports numeric data (with GaussianNB) or categorical data (with CategoricalNB), but not both. 
+Scikit-learn currently only supports numeric features (with GaussianNB) or categorical features (with CategoricalNB), but not both. 
 That's why I created this prototype.
 
 ## Usage
