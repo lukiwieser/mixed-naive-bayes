@@ -34,7 +34,7 @@ from naive_bayes import MixedNB
 ```
 
 Then use the model in the following way.
-When initializing the model specify which features are categorical, and which are numerical, with the argument `categorical_feature_mask`:
+When initializing the model, specify which features are categorical and which are numerical, with the argument `categorical_feature_mask`:
 
 ```python
 model = MixedNB(categorical_feature_mask=[True,False,False,True])
@@ -50,7 +50,7 @@ y_pred = model.predict(X_test)
 
 Additionally, you can run the jupyter notebooks `naive_bayes_comparison.ipynb` and `naive_bayes_testcases.ipynb`.
 
-For more details, you can look at the jupyter notebooks or at the comments/docstrings in the source code.
+For more details, you can look at the jupyter notebooks or the comments/docstrings in the source code.
 
 
 ## Files
