@@ -14,7 +14,7 @@ That's why I created this prototype.
 - [Implementation](#implementation)
 - [Evaluation](#evaluation)
 - [Lessons Learned](#lessons-learned)
-- [License]()
+- [License](#license)
 
 
 ## Usage
