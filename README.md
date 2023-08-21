@@ -10,7 +10,7 @@ That's why I created this prototype.
 ## Contents
 
 - [Usage](#usage)
-- [File Overview](#file-overview)
+- [Files](#files)
 - [Implementation](#implementation)
 - [Evaluation](#evaluation)
 - [Lessons Learned](#lessons-learned)
@@ -53,7 +53,7 @@ Additionally, you can run the jupyter notebooks `naive_bayes_comparison.ipynb` a
 For more details, you can look at the jupyter notebooks or at the comments/docstrings in the source code.
 
 
-## File Overview
+## Files
 
 Source Code (`/src`):
 
