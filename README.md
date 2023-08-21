@@ -6,6 +6,17 @@ Motivation:
 Scikit-learn currently only supports numeric features (with GaussianNB) or categorical features (with CategoricalNB), but not both. 
 That's why I created this prototype.
 
+
+## Contents
+
+- [Usage](#usage)
+- [File Overview](#file-overview)
+- [Implementation](#implementation)
+- [Evaluation](#evaluation)
+- [Lessons Learned](#lessons-learned)
+- [License]()
+
+
 ## Usage
 
 This project uses Python 3.9+.
