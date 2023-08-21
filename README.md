@@ -76,7 +76,7 @@ Datasets (`/data`):
   - Specify datatype at initialization
 - Sklearn-style interface
     - For interoperability with sklearn pipelines etc.
-- Fitting:
+- Training (Fitting):
   - Categorical:
     - Count relative frequencies
     - Laplace Smoothing
@@ -101,22 +101,22 @@ We use 2 datasets that are quite different from each other:
 
 We compare *Our Naive Bayes* against *Scikit-learns Naive Bayes* and *Scikit-learns Random Forest*:
 
-| Dataset             | Model                      | Accuracy | Fitting Time (ms) | Score Time (ms) |
-|---------------------|----------------------------|---------:|------------------:|----------------:|
-| Amazon Review       | Our Naive Bayes*           |     0.65 |               588 |            1884 |
-| --//--              | Scikit-learn Naive Bayes*  |     0.65 |               588 |             188 |
-| --//--              | Scikit-learn Random Forest |     0.61 |               551 |              11 |
-| Car Insurance Claim | Our Naive Bayes**          |     0.80 |                64 |             900 |
-| --//--              | Scikit-learn Naive Bayes** |     0.80 |                 6 |               5 |
-| --//--              | Scikit-learn Random Forest |     0.81 |               777 |              37 |
+| Dataset             | Model                      | Accuracy | Fit Time (ms) | Score Time (ms) |
+|---------------------|----------------------------|---------:|--------------:|----------------:|
+| Amazon Review       | Our Naive Bayes*           |     0.65 |           588 |            1884 |
+| --//--              | Scikit-learn Naive Bayes*  |     0.65 |           588 |             188 |
+| --//--              | Scikit-learn Random Forest |     0.61 |           551 |              11 |
+| Car Insurance Claim | Our Naive Bayes**          |     0.80 |            64 |             900 |
+| --//--              | Scikit-learn Naive Bayes** |     0.80 |             6 |               5 |
+| --//--              | Scikit-learn Random Forest |     0.81 |           777 |              37 |
 
 *Laplace-Smoothing=50
 **Variance-Smoothing=0.01
 
 Our implementation reaches similar accuracy as scikit-learns implementation.
-However, the fitting (aka training) time and the scoring (aka testing) time are substantially slower.
+However, the fit (aka training) time and the score (aka testing) time are substantially slower.
 
-Random Forest has the highest fitting time, but makes up for it with a quite fast score time.
+Random Forest has the highest fit time, but makes up for it with a quite fast score time.
 
 For more details look at the jupyter notebook `naive_bayes_comparison.ipynb`.
 
