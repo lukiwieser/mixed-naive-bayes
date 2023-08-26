@@ -19,8 +19,8 @@ def print_results_table(results_list: list[dict[str, np.ndarray]], headings: lis
         ("avg. f1_macro:", "test_f1_macro"),
         ("avg. precision_macro:", "test_precision_macro"),
         ("avg. recall_macro:", "test_recall_macro"),
-        ("avg. avg. fitting time:", "fit_time"),
-        ("avg. avg. score time:", "score_time")
+        ("avg. fitting time:", "fit_time"),
+        ("avg. score time:", "score_time")
     ]
 
     print(f"{'': <{left_col_size}}", end=" ")
