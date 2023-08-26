@@ -3,8 +3,7 @@
 Naive Bayes Classifier for categorical and/or numeric features.
 
 Motivation:
-Scikit-learn currently only supports numeric features (with GaussianNB) or categorical features (with CategoricalNB), but not both. 
-That's why I created this prototype.
+Scikit-learn currently only supports numeric features (with GaussianNB) or categorical features (with CategoricalNB), but not both at the same time.
 
 
 ## Contents
@@ -123,18 +122,18 @@ For more details look at the jupyter notebook `naive_bayes_comparison.ipynb`.
 
 ## Lessons Learned
 
-- our implementation is very effective, but slowish.
-- take numerical stability into account e.g.:
-  - log-likelihoods (when multiplying lots of small probabilities together)
-  - variance-smoothing (so that variance values do not get too small)
-- efficiently working with pandas/numpy is important
-  - can turn hours into seconds!  
+- Our implementation is very effective, but slowish.
+- Take numerical stability into account e.g.:
+  - Log-likelihoods (when multiplying lots of small probabilities together)
+  - Variance-smoothing (so that variance values do not get too small)
+- Efficiently working with pandas/numpy is important
+  - Can turn hours into seconds!  
   - e.g. by using bulk operations instead of lots of loops
-- garbage in, garbage out
-  - accidentally doing nonsense can happen easier than expected
+- Garbage in, garbage out
+  - Accidentally doing nonsense can happen more easily than expected
   - e.g. do one-hot-encoding, then apply gaussian naive bayes
-- input validation can avoid foolish mistakes
-- it is easy to make mistakes, the algorithm can run but still output wrong calculations
+- Input validation can avoid foolish mistakes
+- It is easy to make mistakes, the algorithm can run but still output wrong calculations
 
 
 ## License
